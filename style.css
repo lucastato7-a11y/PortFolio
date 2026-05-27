@@ -1,160 +1,360 @@
-/* VARIABLES */
+/* =========================
+   VARIABLES
+========================= */
 :root{
-    --color-principal: #6c63ff;
+    --color-principal: #ffffff;
     --color-secundario: #1e1e2f;
-    --color-fondo: #f5f5f5;
-    --color-texto: #222;
+    --color-texto: #ffffff;
 
     --fuente-principal: 'Poppins', sans-serif;
 }
 
-/* RESET */
+/* =========================
+   RESET
+========================= */
 *{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-/* BODY */
+/* =========================
+   BODY
+========================= */
 body{
     font-family: var(--fuente-principal);
 
-    background: linear-gradient(135deg, #f5f5f5, #dfe9f3);
+    background: linear-gradient(
+        -45deg,
+        #6c63ff,
+        #5145ff,
+        #8b5cf6,
+        #4338ca
+    );
+
+    background-size: 400% 400%;
+
+    animation: fondoAnimado 12s ease infinite;
 
     color: var(--color-texto);
 }
 
-/* HEADER */
+/* =========================
+   HEADER
+========================= */
 .header{
-    background-color: var(--color-secundario);
+    background-color: rgba(30,30,47,0.7);
+
+    backdrop-filter: blur(10px);
+
     padding: 20px 40px;
+
+    position: sticky;
+
+    top: 0;
+
+    z-index: 1000;
+
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
 }
 
-/* NAVBAR */
+/* =========================
+   NAVBAR
+========================= */
 .navbar{
     display: flex;
+
     justify-content: space-between;
+
     align-items: center;
 }
 
-/* LOGO */
+/* =========================
+   LOGO
+========================= */
 .logo{
     color: white;
+
     font-size: 28px;
+
+    font-weight: bold;
 }
 
-/* LINKS */
+/* =========================
+   LINKS
+========================= */
 .nav-links{
     display: flex;
+
     gap: 20px;
+
     list-style: none;
 }
 
 .nav-links a{
     color: white;
+
     text-decoration: none;
+
     transition: 0.3s;
 }
 
 .nav-links a:hover{
-    color: var(--color-principal);
+    color: #dcd6ff;
+
+    transform: scale(1.05);
 }
 
-/* HERO */
+/* =========================
+   HERO
+========================= */
 .hero{
-    height: 90vh;
+    height: 100vh;
 
     display: flex;
+
     justify-content: center;
+
     align-items: center;
+
     text-align: center;
 
     padding: 20px;
 }
 
+/* =========================
+   HERO CONTENT
+========================= */
+.hero-content{
+    animation: aparecer 1s ease;
+}
+
 .hero-content h2{
-    font-size: 50px;
+    font-size: 60px;
+
     margin-bottom: 20px;
 }
 
 .hero-content p{
     margin-bottom: 30px;
-    font-size: 18px;
+
+    font-size: 20px;
 }
 
-/* BOTON */
+/* =========================
+   BOTON
+========================= */
 .btn{
-    background-color: var(--color-principal);
-    color: white;
+    background-color: white;
+
+    color: #5145ff;
 
     padding: 12px 24px;
 
-    border-radius: 10px;
+    border-radius: 12px;
+
     text-decoration: none;
 
     transition: 0.3s;
-}
-.contact .btn{
+
     display: inline-block;
-    margin-top: 20px;
+
+    font-weight: bold;
+
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
 }
 
 .btn:hover{
-    background-color: #5145ff;
+    transform: scale(1.08);
+
+    background-color: #ececec;
 }
 
-/* SECCIONES */
+/* =========================
+   SECCIONES
+========================= */
 section{
-    padding: 80px 40px;
+    padding: 100px 40px;
+
+    animation: aparecer 1s ease;
 }
 
-/* CARDS */
+/* =========================
+   TITULOS
+========================= */
+section h2{
+    font-size: 40px;
+
+    margin-bottom: 20px;
+
+    text-align: center;
+}
+
+/* =========================
+   ABOUT
+========================= */
+.about{
+    text-align: center;
+}
+
+/* =========================
+   PROYECTOS
+========================= */
+.projects{
+    text-align: center;
+}
+
+/* =========================
+   CARDS
+========================= */
 .cards-container{
     display: grid;
+
     grid-template-columns: repeat(3,1fr);
-    gap: 20px;
+
+    gap: 25px;
 
     margin-top: 40px;
 }
 
 .card{
-    background-color: white;
+    background: rgba(255,255,255,0.12);
 
-    padding: 20px;
+    backdrop-filter: blur(10px);
 
-    border-radius: 15px;
+    padding: 25px;
 
-    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    border-radius: 20px;
 
-    transition: 0.3s;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+
+    transition: 0.4s;
+
+    animation: aparecer 1s ease forwards;
 }
 
 .card:hover{
-    transform: translateY(-5px);
+    transform: translateY(-10px) scale(1.03);
 }
 
-/* HABILIDADES */
+.card:nth-child(1){
+    animation-delay: 0.2s;
+}
+
+.card:nth-child(2){
+    animation-delay: 0.4s;
+}
+
+.card:nth-child(3){
+    animation-delay: 0.6s;
+}
+
+.card h3{
+    margin-bottom: 10px;
+}
+
+/* =========================
+   HABILIDADES
+========================= */
+.skills{
+    text-align: center;
+}
+
 .skills-list{
     display: flex;
+
+    justify-content: center;
+
     gap: 15px;
+
     margin-top: 20px;
+
     flex-wrap: wrap;
 }
 
 .skills-list span{
-    background-color: var(--color-principal);
-    color: white;
+    background-color: rgba(255,255,255,0.2);
 
-    padding: 10px 15px;
+    padding: 12px 18px;
 
-    border-radius: 10px;
+    border-radius: 12px;
+
+    transition: 0.3s;
+
+    backdrop-filter: blur(10px);
 }
 
-/* RESPONSIVE TABLET */
+.skills-list span:hover{
+    transform: scale(1.08);
+}
+
+/* =========================
+   CONTACTO
+========================= */
+.contact{
+    text-align: center;
+}
+
+.contact .btn{
+    margin-top: 20px;
+}
+
+/* =========================
+   FOOTER
+========================= */
+.footer{
+    background-color: rgba(30,30,47,0.8);
+
+    backdrop-filter: blur(10px);
+
+    color: white;
+
+    text-align: center;
+
+    padding: 25px;
+}
+
+/* =========================
+   ANIMACIONES
+========================= */
+@keyframes aparecer{
+
+    from{
+        opacity: 0;
+        transform: translateY(40px);
+    }
+
+    to{
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+}
+
+@keyframes fondoAnimado{
+
+    0%{
+        background-position: 0% 50%;
+    }
+
+    50%{
+        background-position: 100% 50%;
+    }
+
+    100%{
+        background-position: 0% 50%;
+    }
+
+}
+
+/* =========================
+   RESPONSIVE TABLET
+========================= */
 @media(max-width:768px){
 
     .navbar{
         flex-direction: column;
+
         gap: 20px;
     }
 
@@ -162,13 +362,20 @@ section{
         grid-template-columns: 1fr 1fr;
     }
 
+    .hero-content h2{
+        font-size: 45px;
+    }
+
 }
 
-/* RESPONSIVE CELULAR */
+/* =========================
+   RESPONSIVE CELULAR
+========================= */
 @media(max-width:480px){
 
     .nav-links{
         flex-direction: column;
+
         text-align: center;
     }
 
@@ -180,4 +387,10 @@ section{
         font-size: 35px;
     }
 
-}
+    .hero-content p{
+        font-size: 16px;
+    }
+
+    section{
+        padding: 70px 20px;
+    }
