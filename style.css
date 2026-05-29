@@ -1,396 +1,603 @@
 /* =========================
-   VARIABLES
+   RESET
 ========================= */
-:root{
-    --color-principal: #ffffff;
-    --color-secundario: #1e1e2f;
-    --color-texto: #ffffff;
 
-    --fuente-principal: 'Poppins', sans-serif;
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
 }
 
 /* =========================
-   RESET
+   VARIABLES
 ========================= */
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+
+:root{
+
+    --bg:#0b0f19;
+    --bg2:#111827;
+
+    --primary:#38bdf8;
+    --primary2:#0ea5e9;
+
+    --text:#ffffff;
+    --text2:#cbd5e1;
+
 }
 
 /* =========================
    BODY
 ========================= */
+
 body{
-    font-family: var(--fuente-principal);
 
-    background: linear-gradient(
-        -45deg,
-        #6c63ff,
-        #5145ff,
-        #8b5cf6,
-        #4338ca
-    );
+    font-family:'Poppins', sans-serif;
 
-    background-size: 400% 400%;
+    color:var(--text);
 
-    animation: fondoAnimado 12s ease infinite;
+    background:
+    radial-gradient(circle at top left, rgba(0,153,255,0.15), transparent 30%),
+    radial-gradient(circle at bottom right, rgba(140,0,255,0.15), transparent 30%),
+    linear-gradient(120deg, #0b0f19, #111827, #0f172a);
 
-    color: var(--color-texto);
+    background-size:200% 200%;
+
+    animation:fondo 15s ease infinite;
+
+    overflow-x:hidden;
+
 }
 
 /* =========================
    HEADER
 ========================= */
+
 .header{
-    background-color: rgba(30,30,47,0.7);
 
-    backdrop-filter: blur(10px);
+    position:fixed;
 
-    padding: 20px 40px;
+    width:100%;
 
-    position: sticky;
+    top:0;
 
-    top: 0;
+    z-index:1000;
 
-    z-index: 1000;
+    background:rgba(10,10,20,0.55);
 
-    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    backdrop-filter:blur(12px);
+
+    border-bottom:1px solid rgba(255,255,255,0.08);
+
 }
 
-/* =========================
-   NAVBAR
-========================= */
 .navbar{
-    display: flex;
 
-    justify-content: space-between;
+    max-width:1200px;
 
-    align-items: center;
+    margin:auto;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    padding:22px 20px;
+
 }
 
-/* =========================
-   LOGO
-========================= */
 .logo{
-    color: white;
 
-    font-size: 28px;
+    font-size:28px;
 
-    font-weight: bold;
+    font-weight:700;
+
+    color:var(--primary);
+
 }
 
-/* =========================
-   LINKS
-========================= */
 .nav-links{
-    display: flex;
 
-    gap: 20px;
+    display:flex;
 
-    list-style: none;
+    list-style:none;
+
+    gap:28px;
+
 }
 
 .nav-links a{
-    color: white;
 
-    text-decoration: none;
+    color:white;
 
-    transition: 0.3s;
+    text-decoration:none;
+
+    font-weight:500;
+
+    position:relative;
+
+    transition:0.3s;
+
+}
+
+.nav-links a::after{
+
+    content:"";
+
+    position:absolute;
+
+    left:0;
+
+    bottom:-6px;
+
+    width:0%;
+
+    height:2px;
+
+    background:var(--primary);
+
+    transition:0.3s;
+
 }
 
 .nav-links a:hover{
-    color: #dcd6ff;
 
-    transform: scale(1.05);
+    color:var(--primary);
+
+}
+
+.nav-links a:hover::after{
+
+    width:100%;
+
 }
 
 /* =========================
    HERO
 ========================= */
+
 .hero{
-    height: 100vh;
 
-    display: flex;
+    min-height:100vh;
 
-    justify-content: center;
+    display:flex;
 
-    align-items: center;
+    justify-content:center;
 
-    text-align: center;
+    align-items:center;
 
-    padding: 20px;
+    text-align:center;
+
+    padding:20px;
+
 }
 
-/* =========================
-   HERO CONTENT
-========================= */
 .hero-content{
-    animation: aparecer 1s ease;
+
+    animation:aparecer 1.2s ease;
+
 }
 
-.hero-content h2{
-    font-size: 60px;
+.hero h2{
 
-    margin-bottom: 20px;
+    font-size:72px;
+
+    margin-bottom:20px;
+
+    font-weight:700;
+
+    background:linear-gradient(90deg,#ffffff,#38bdf8);
+
+    -webkit-background-clip:text;
+
+    -webkit-text-fill-color:transparent;
+
 }
 
-.hero-content p{
-    margin-bottom: 30px;
+.hero p{
 
-    font-size: 20px;
+    max-width:750px;
+
+    margin:auto;
+
+    line-height:1.8;
+
+    font-size:18px;
+
+    color:var(--text2);
+
 }
 
 /* =========================
-   BOTON
+   BOTONES
 ========================= */
+
 .btn{
-    background-color: white;
 
-    color: #5145ff;
+    display:inline-block;
 
-    padding: 12px 24px;
+    margin-top:35px;
 
-    border-radius: 12px;
+    padding:15px 28px;
 
-    text-decoration: none;
+    background:linear-gradient(90deg,#38bdf8,#0ea5e9);
 
-    transition: 0.3s;
+    color:white;
 
-    display: inline-block;
+    border-radius:14px;
 
-    font-weight: bold;
+    font-weight:600;
 
-    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    text-decoration:none;
+
+    transition:0.3s;
+
+    box-shadow:
+    0 10px 25px rgba(56,189,248,0.3);
+
 }
 
 .btn:hover{
-    transform: scale(1.08);
 
-    background-color: #ececec;
+    transform:translateY(-4px);
+
+    box-shadow:
+    0 15px 35px rgba(56,189,248,0.45);
+
 }
 
 /* =========================
-   SECCIONES
+   SECTIONS
 ========================= */
+
 section{
-    padding: 100px 40px;
 
-    animation: aparecer 1s ease;
+    max-width:1200px;
+
+    margin:auto;
+
+    padding:120px 20px;
+
 }
 
-/* =========================
-   TITULOS
-========================= */
 section h2{
-    font-size: 40px;
 
-    margin-bottom: 20px;
+    font-size:42px;
 
-    text-align: center;
+    margin-bottom:45px;
+
+    text-align:center;
+
 }
 
 /* =========================
    ABOUT
 ========================= */
-.about{
-    text-align: center;
-}
 
-/* =========================
-   PROYECTOS
-========================= */
-.projects{
-    text-align: center;
+.about{
+
+    max-width:800px;
+
+    margin:auto;
+
+    text-align:center;
+
+    line-height:1.9;
+
+    color:var(--text2);
+
+    font-size:18px;
+
 }
 
 /* =========================
    CARDS
 ========================= */
-.cards-container{
-    display: grid;
 
-    grid-template-columns: repeat(3,1fr);
+.cards{
 
-    gap: 25px;
+    display:grid;
 
-    margin-top: 40px;
+    grid-template-columns:
+    repeat(auto-fit,minmax(280px,1fr));
+
+    gap:30px;
+
 }
 
 .card{
-    background: rgba(255,255,255,0.12);
 
-    backdrop-filter: blur(10px);
+    background:rgba(255,255,255,0.05);
 
-    padding: 25px;
+    backdrop-filter:blur(12px);
 
-    border-radius: 20px;
+    border:1px solid rgba(255,255,255,0.08);
 
-    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+    border-radius:22px;
 
-    transition: 0.4s;
+    padding:30px;
 
-    animation: aparecer 1s ease forwards;
+    transition:0.4s ease;
+
+    box-shadow:
+    0 10px 30px rgba(0,0,0,0.2);
+
 }
 
 .card:hover{
-    transform: translateY(-10px) scale(1.03);
-}
 
-.card:nth-child(1){
-    animation-delay: 0.2s;
-}
+    transform:translateY(-10px);
 
-.card:nth-child(2){
-    animation-delay: 0.4s;
-}
+    border-color:var(--primary);
 
-.card:nth-child(3){
-    animation-delay: 0.6s;
+    box-shadow:
+    0 15px 40px rgba(56,189,248,0.2);
+
 }
 
 .card h3{
-    margin-bottom: 10px;
+
+    margin-bottom:15px;
+
+    font-size:24px;
+
+}
+
+.card p{
+
+    color:var(--text2);
+
+    line-height:1.7;
+
+    margin-bottom:20px;
+
+}
+
+.card-btn{
+
+    display:inline-block;
+
+    padding:10px 16px;
+
+    border-radius:10px;
+
+    background:rgba(255,255,255,0.08);
+
+    color:var(--primary);
+
+    text-decoration:none;
+
+    font-weight:600;
+
+    transition:0.3s;
+
+}
+
+.card-btn:hover{
+
+    background:var(--primary);
+
+    color:white;
+
 }
 
 /* =========================
-   HABILIDADES
+   SKILLS
 ========================= */
+
 .skills{
-    text-align: center;
+
+    display:flex;
+
+    justify-content:center;
+
+    flex-wrap:wrap;
+
+    gap:18px;
+
 }
 
-.skills-list{
-    display: flex;
+.skills span{
 
-    justify-content: center;
+    padding:12px 18px;
 
-    gap: 15px;
+    background:rgba(255,255,255,0.06);
 
-    margin-top: 20px;
+    border:1px solid rgba(255,255,255,0.1);
 
-    flex-wrap: wrap;
+    border-radius:12px;
+
+    transition:0.3s;
+
 }
 
-.skills-list span{
-    background-color: rgba(255,255,255,0.2);
+.skills span:hover{
 
-    padding: 12px 18px;
+    transform:translateY(-5px);
 
-    border-radius: 12px;
+    background:var(--primary);
 
-    transition: 0.3s;
-
-    backdrop-filter: blur(10px);
-}
-
-.skills-list span:hover{
-    transform: scale(1.08);
 }
 
 /* =========================
    CONTACTO
 ========================= */
-.contact{
-    text-align: center;
+
+#contacto{
+
+    text-align:center;
+
 }
 
-.contact .btn{
-    margin-top: 20px;
+#contacto p{
+
+    color:var(--text2);
+
+    margin-bottom:15px;
+
 }
 
 /* =========================
    FOOTER
 ========================= */
-.footer{
-    background-color: rgba(30,30,47,0.8);
 
-    backdrop-filter: blur(10px);
+footer{
 
-    color: white;
+    text-align:center;
 
-    text-align: center;
+    padding:35px;
 
-    padding: 25px;
+    border-top:1px solid rgba(255,255,255,0.08);
+
+    color:var(--text2);
+
 }
 
 /* =========================
    ANIMACIONES
 ========================= */
-@keyframes aparecer{
 
-    from{
-        opacity: 0;
-        transform: translateY(40px);
-    }
-
-    to{
-        opacity: 1;
-        transform: translateY(0);
-    }
-
-}
-
-@keyframes fondoAnimado{
+@keyframes fondo{
 
     0%{
-        background-position: 0% 50%;
+        background-position:0% 50%;
     }
 
     50%{
-        background-position: 100% 50%;
+        background-position:100% 50%;
     }
 
     100%{
-        background-position: 0% 50%;
+        background-position:0% 50%;
+    }
+
+}
+
+@keyframes aparecer{
+
+    from{
+
+        opacity:0;
+
+        transform:translateY(40px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:translateY(0);
+
     }
 
 }
 
 /* =========================
-   RESPONSIVE TABLET
+   RESPONSIVE
 ========================= */
+
 @media(max-width:768px){
 
     .navbar{
-        flex-direction: column;
 
-        gap: 20px;
+        flex-direction:column;
+
+        gap:20px;
+
     }
 
-    .cards-container{
-        grid-template-columns: 1fr 1fr;
+    .nav-links{
+
+        flex-wrap:wrap;
+
+        justify-content:center;
+
+        gap:15px;
+
     }
 
-    .hero-content h2{
-        font-size: 45px;
+    .hero h2{
+
+        font-size:48px;
+
     }
+
+    section h2{
+
+        font-size:34px;
+
+    }
+/* =========================
+   TABLA SKILLS
+========================= */
+
+.skills-table-container{
+
+    display:flex;
+    justify-content:center;
 
 }
 
-/* =========================
-   RESPONSIVE CELULAR
-========================= */
-@media(max-width:480px){
+.skills-table{
 
-    .nav-links{
-        flex-direction: column;
+    width:100%;
+    max-width:700px;
 
-        text-align: center;
-    }
+    border-collapse:collapse;
 
-    .cards-container{
-        grid-template-columns: 1fr;
-    }
+    background:rgba(255,255,255,0.05);
 
-    .hero-content h2{
-        font-size: 35px;
-    }
+    backdrop-filter:blur(10px);
 
-    .hero-content p{
-        font-size: 16px;
-    }
+    border:1px solid rgba(255,255,255,0.08);
 
-    section{
-        padding: 70px 20px;
-    }
+    border-radius:18px;
+
+    overflow:hidden;
+
+    box-shadow:
+    0 10px 30px rgba(0,0,0,0.2);
+
+}
+
+.skills-table th{
+
+    background:rgba(56,189,248,0.15);
+
+    color:white;
+
+    padding:18px;
+
+    font-size:18px;
+
+    text-align:left;
+
+}
+
+.skills-table td{
+
+    padding:18px;
+
+    border-top:1px solid rgba(255,255,255,0.08);
+
+    color:#cbd5e1;
+
+}
+
+.skills-table tr{
+
+    transition:0.3s;
+
+}
+
+.skills-table tr:hover{
+
+    background:rgba(255,255,255,0.05);
+
+}
+}
