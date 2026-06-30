@@ -1,11 +1,19 @@
 /* =========================================================
    script.js — Portfolio de Lucas
+   -----------------------------------------------------------
+   Índice rápido:
+     1. Datos (arrays)              -> proyectos, skills
+     2. Render de proyectos + filtro -> función principal #1
+     3. Render de skills + buscador  -> función principal #2
+     4. Validación del formulario    -> con try/catch
+     5. Listeners de eventos
 ========================================================= */
 
 /* ---------------------------------------------------------
    1. DATOS — ARRAYS
 --------------------------------------------------------- */
 
+// Array de objetos: cada proyecto con su info y tecnologías usadas
 const proyectos = [
   {
     nombre: "Portfolio Web",
@@ -33,6 +41,7 @@ const proyectos = [
   }
 ];
 
+// Array de objetos: cada skill con su nivel, usado en la sección Skills
 const skills = [
   { nombre: "HTML", area: "Estructura y Semántica", nivel: "Avanzado" },
   { nombre: "CSS", area: "Diseño y Animaciones", nivel: "Avanzado" },
@@ -44,6 +53,7 @@ const skills = [
    2. PROYECTOS — render + filtro (funcionalidad principal #1)
 --------------------------------------------------------- */
 
+// Crea una sola card de proyecto y la devuelve (no la inserta todavía)
 function crearCardProyecto(proyecto) {
   const card = document.createElement("div");
   card.classList.add("card");
@@ -68,6 +78,7 @@ function crearCardProyecto(proyecto) {
   boton.href = proyecto.link;
   boton.textContent = "Ver";
 
+  // Evento: mouseover -> muestra brevemente las tecnologías en el título (acción visible)
   card.addEventListener("mouseover", function () {
     titulo.textContent = proyecto.nombre + " — " + proyecto.tecnologias.join(" / ");
   });
@@ -83,10 +94,11 @@ function crearCardProyecto(proyecto) {
   return card;
 }
 
+// Dibuja en el DOM las cards de proyectos, filtradas por tecnología ("Todos" = sin filtro)
 function renderProyectos(filtro) {
   const contenedor = document.getElementById("cards-container");
   const vacio = document.getElementById("proyectos-empty");
-  contenedor.innerHTML = "";
+  contenedor.innerHTML = ""; // limpiar antes de re-dibujar
 
   const filtrados = filtro === "Todos"
     ? proyectos
@@ -101,6 +113,7 @@ function renderProyectos(filtro) {
   });
 }
 
+// Genera los botones de filtro a partir de las tecnologías que aparecen en "proyectos"
 function renderFiltrosProyectos() {
   const barra = document.getElementById("filter-bar");
   barra.innerHTML = "";
@@ -121,6 +134,7 @@ function renderFiltrosProyectos() {
     boton.textContent = tec;
     if (tec === "Todos") boton.classList.add("active");
 
+    // Evento: click sobre un botón de filtro
     boton.addEventListener("click", function () {
       document.querySelectorAll(".filter-btn").forEach(function (b) {
         b.classList.remove("active");
@@ -137,6 +151,7 @@ function renderFiltrosProyectos() {
    3. SKILLS — render + buscador (funcionalidad principal #2)
 --------------------------------------------------------- */
 
+// Dibuja todas las skill-cards en el DOM a partir del array "skills"
 function renderSkills() {
   const grid = document.getElementById("skills-grid");
   grid.innerHTML = "";
@@ -163,6 +178,7 @@ function renderSkills() {
   });
 }
 
+// Filtra las skill-cards ya dibujadas según lo que se escribe en el buscador
 function filtrarSkills(texto) {
   const termino = texto.trim().toLowerCase();
   const cards = document.querySelectorAll(".skill-card");
@@ -171,7 +187,7 @@ function filtrarSkills(texto) {
 
   cards.forEach(function (card) {
     const coincide = card.dataset.nombre.includes(termino);
-    card.classList.toggle("is-hidden", !coincide);
+    card.classList.toggle("is-hidden", !coincide); // mostrar u ocultar contenido
     if (coincide) visibles++;
   });
 
@@ -206,7 +222,8 @@ function limpiarError(idCampo, idError) {
 }
 
 // Valida los 4 campos del formulario. Usa try/catch para contener cualquier
-// error inesperado de estructura y avisar al usuario en vez de romper el envío.
+// error inesperado de estructura (por ejemplo, si falta un campo en el DOM)
+// y avisar al usuario en vez de romper el envío silenciosamente.
 function validarFormularioContacto(datos) {
   let esValido = true;
 
@@ -260,6 +277,7 @@ function validarFormularioContacto(datos) {
 --------------------------------------------------------- */
 
 document.addEventListener("DOMContentLoaded", function () {
+  // Render inicial de todo el contenido dinámico
   renderFiltrosProyectos();
   renderProyectos("Todos");
   renderSkills();
@@ -267,6 +285,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const formulario = document.getElementById("contacto-form");
   const estado = document.getElementById("form-status");
 
+  // Evento: submit del formulario -> valida antes de mandar a Formspree
   formulario.addEventListener("submit", function (evento) {
     const datos = {
       nombre: document.getElementById("nombre").value,
@@ -281,12 +300,14 @@ document.addEventListener("DOMContentLoaded", function () {
     const esValido = validarFormularioContacto(datos);
 
     if (!esValido) {
+      // Si hay errores, frenamos el envío real al servidor
       evento.preventDefault();
     } else {
       estado.textContent = "Enviando tu mensaje...";
     }
   });
 
+  // Evento: input en el campo email -> valida en vivo mientras se escribe
   document.getElementById("email").addEventListener("input", function (evento) {
     const valor = evento.target.value;
     if (valor.trim().length === 0 || validarEmail(valor)) {
@@ -294,6 +315,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 
+  // Evento: input en el buscador de skills -> filtra en vivo
   document.getElementById("skills-search-input").addEventListener("input", function (evento) {
     filtrarSkills(evento.target.value);
   });
