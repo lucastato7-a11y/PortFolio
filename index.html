@@ -60,24 +60,16 @@
 <!-- SKILLS -->
 <section id="skills">
     <h2>Skills</h2>
-    <div class="skills-grid">
-        <div class="skill-card">
-            <h3>HTML</h3>
-            <p>Estructura y Semántica</p>
-        </div>
-        <div class="skill-card">
-            <h3>CSS</h3>
-            <p>Diseño y Animaciones</p>
-        </div>
-        <div class="skill-card">
-            <h3>JavaScript</h3>
-            <p>Interactividad y Lógica</p>
-        </div>
-        <div class="skill-card">
-            <h3>Git</h3>
-            <p>Control de Versiones</p>
-        </div>
+
+    <div class="skills-search">
+        <input type="text" id="skills-search-input" placeholder="Buscar una tecnología (ej: CSS)...">
     </div>
+
+    <div class="skills-grid" id="skills-grid">
+        <!-- Skill-cards generadas dinámicamente por JS a partir del array "skills" -->
+    </div>
+
+    <p class="empty-state" id="skills-empty" hidden>No encontré ninguna skill con ese nombre.</p>
 </section>
 
 <!-- VIDEOS / RECURSOS -->
