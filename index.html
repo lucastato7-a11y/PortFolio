@@ -45,23 +45,16 @@
 <!-- PROYECTOS -->
 <section id="proyectos">
     <h2>Proyectos</h2>
-    <div class="cards">
-        <div class="card">
-            <h3>Portfolio Web</h3>
-            <p>Sitio personal hecho con HTML y CSS.</p>
-            <a class="card-btn" href="#">Ver</a>
-        </div>
-        <div class="card">
-            <h3>Landing Page</h3>
-            <p>Diseño moderno responsive.</p>
-            <a class="card-btn" href="#">Ver</a>
-        </div>
-        <div class="card">
-            <h3>Proyecto JS</h3>
-            <p>App interactiva con JavaScript.</p>
-            <a class="card-btn" href="#">Ver</a>
-        </div>
+
+    <div class="filter-bar" id="filter-bar">
+        <!-- Botones de filtro generados dinámicamente por JS según las tecnologías usadas -->
     </div>
+
+    <div class="cards" id="cards-container">
+        <!-- Cards generadas dinámicamente por JS a partir del array "proyectos" -->
+    </div>
+
+    <p class="empty-state" id="proyectos-empty" hidden>No hay proyectos con esa tecnología todavía.</p>
 </section>
 
 <!-- SKILLS -->
@@ -149,5 +142,7 @@
     © 2026 - Lucas Dev
 </footer>
 
+<script src="script.js"></script>
 </body>
+
 </html>
