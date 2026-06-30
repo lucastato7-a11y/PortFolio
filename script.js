@@ -179,13 +179,120 @@ function filtrarSkills(texto) {
 }
 
 /* ---------------------------------------------------------
-   4. EVENTOS PRINCIPALES
+   4. VALIDACIÓN DEL FORMULARIO DE CONTACTO
+--------------------------------------------------------- */
+
+function validarCampoObligatorio(valor) {
+  return valor.trim().length > 0;
+}
+
+function validarEmail(valor) {
+  const patron = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return patron.test(valor.trim());
+}
+
+function mostrarError(idCampo, idError, mensaje) {
+  const campo = document.getElementById(idCampo);
+  const error = document.getElementById(idError);
+  campo.closest(".form-group").classList.add("has-error");
+  error.textContent = mensaje;
+}
+
+function limpiarError(idCampo, idError) {
+  const campo = document.getElementById(idCampo);
+  const error = document.getElementById(idError);
+  campo.closest(".form-group").classList.remove("has-error");
+  error.textContent = "";
+}
+
+// Valida los 4 campos del formulario. Usa try/catch para contener cualquier
+// error inesperado de estructura y avisar al usuario en vez de romper el envío.
+function validarFormularioContacto(datos) {
+  let esValido = true;
+
+  try {
+    const { nombre, email, motivo, mensaje } = datos;
+
+    if (!validarCampoObligatorio(nombre)) {
+      mostrarError("nombre", "error-nombre", "Ingresá tu nombre completo.");
+      esValido = false;
+    } else {
+      limpiarError("nombre", "error-nombre");
+    }
+
+    if (!validarCampoObligatorio(email)) {
+      mostrarError("email", "error-email", "Ingresá tu correo electrónico.");
+      esValido = false;
+    } else if (!validarEmail(email)) {
+      mostrarError("email", "error-email", "Ese correo no parece válido.");
+      esValido = false;
+    } else {
+      limpiarError("email", "error-email");
+    }
+
+    if (!validarCampoObligatorio(motivo)) {
+      mostrarError("motivo", "error-motivo", "Elegí un motivo de contacto.");
+      esValido = false;
+    } else {
+      limpiarError("motivo", "error-motivo");
+    }
+
+    if (!validarCampoObligatorio(mensaje)) {
+      mostrarError("mensaje", "error-mensaje", "Escribí tu mensaje antes de enviar.");
+      esValido = false;
+    } else {
+      limpiarError("mensaje", "error-mensaje");
+    }
+  } catch (error) {
+    console.error("Error al validar el formulario de contacto:", error);
+    const estado = document.getElementById("form-status");
+    estado.textContent = "Ocurrió un problema al validar el formulario. Probá de nuevo.";
+    estado.classList.remove("success");
+    estado.classList.add("error");
+    esValido = false;
+  }
+
+  return esValido;
+}
+
+/* ---------------------------------------------------------
+   5. EVENTOS PRINCIPALES
 --------------------------------------------------------- */
 
 document.addEventListener("DOMContentLoaded", function () {
   renderFiltrosProyectos();
   renderProyectos("Todos");
   renderSkills();
+
+  const formulario = document.getElementById("contacto-form");
+  const estado = document.getElementById("form-status");
+
+  formulario.addEventListener("submit", function (evento) {
+    const datos = {
+      nombre: document.getElementById("nombre").value,
+      email: document.getElementById("email").value,
+      motivo: document.getElementById("motivo").value,
+      mensaje: document.getElementById("mensaje").value
+    };
+
+    estado.textContent = "";
+    estado.classList.remove("success", "error");
+
+    const esValido = validarFormularioContacto(datos);
+
+    if (!esValido) {
+      evento.preventDefault();
+    } else {
+      estado.textContent = "Enviando tu mensaje...";
+    }
+  });
+
+  document.getElementById("email").addEventListener("input", function (evento) {
+    const valor = evento.target.value;
+    if (valor.trim().length === 0 || validarEmail(valor)) {
+      limpiarError("email", "error-email");
+    }
+  });
 
   document.getElementById("skills-search-input").addEventListener("input", function (evento) {
     filtrarSkills(evento.target.value);
